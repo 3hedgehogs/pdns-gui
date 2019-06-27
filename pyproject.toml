@@ -1,0 +1,21 @@
+[tool.black]
+target-version = ["py36"]
+exclude = '''
+(
+  /(
+      \.cache
+    | \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.packages
+    | \.pip
+    | \.tox
+    | \.venv.*
+    | \.virtualenv.*
+    | _build
+    | build
+    | dist
+    | .*\.html
+  )/
+)
+'''

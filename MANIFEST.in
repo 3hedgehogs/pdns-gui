@@ -1,0 +1,5 @@
+include .env.example.sh
+include LICENSE
+include Pipfile
+include README.rst
+recursive-include pdns_gui *
