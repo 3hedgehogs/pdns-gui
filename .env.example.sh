@@ -55,3 +55,12 @@ DATABASE_DJANGO_URL="sqlite:///run/db/django.sqlite"
 # DATABASE_CHARSET="utf8mb4"
 # DATABASE_COLLATION="utf8mb4_unicode_ci"
 # DATABASE_FOR_APPS="blog=default,*=django"
+
+# LDAP authentication
+# LDAP_AUTH_URL="ldaps://ldap.example.com:636"
+# LDAP_AUTH_FORMAT_USERNAME="django_python3_ldap.utils.format_username_active_directory"
+# LDAP_AUTH_ACTIVE_DIRECTORY_DOMAIN="DOMAIN"
+# LDAP_AUTH_SEARCH_BASE="OU=Users and Workstations,DC=example,DC=com"
+# LDAP_AUTH_OBJECT_CLASS="user"
+# LDAP_AUTH_USER_FIELDS="username=sAMAccountName,first_name=givenName,last_name=sn,email=mail"
+# LDAP_AUTH_CLEAN_USER_DATA="django_python3_ldap.utils.clean_user_data"

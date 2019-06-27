@@ -35,6 +35,7 @@ BASE_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "model_utils",
+    "django_python3_ldap",
     "tz_detect",
     "adminsortable2",
     "django_createuser",
@@ -293,6 +294,39 @@ if SECRET_FILE and not SECRET_KEY:
         with open(SECRET_FILE, "w") as f:
             f.write(SECRET_KEY)
 
+# LDAP authentication
+LDAP_AUTH_URL = env.str("LDAP_AUTH_URL", "")
+
+if LDAP_AUTH_URL:
+    # Turn on LDAP backend as a main authentication backend class
+    AUTHENTICATION_BACKENDS = ["django_python3_ldap.auth.LDAPBackend"]
+
+    # Path to a callable that takes a dict of {model_field_name: value}, and returns
+    # a string of the username to bind to the LDAP server.
+    LDAP_AUTH_FORMAT_USERNAME = env.str(
+        "LDAP_AUTH_FORMAT_USERNAME",
+        default="django_python3_ldap.utils.format_username_active_directory",
+    )
+
+    # Sets the login domain for Active Directory users.
+    LDAP_AUTH_ACTIVE_DIRECTORY_DOMAIN = env.str("LDAP_AUTH_ACTIVE_DIRECTORY_DOMAIN")
+
+    # The LDAP search base for looking up users.
+    LDAP_AUTH_SEARCH_BASE = env.str("LDAP_AUTH_SEARCH_BASE")
+
+    # The LDAP class that represents a user.
+    LDAP_AUTH_OBJECT_CLASS = env.str("LDAP_AUTH_OBJECT_CLASS")
+
+    # User model fields mapped to the LDAP
+    # attributes that represent them.
+    LDAP_AUTH_USER_FIELDS = env.dict("LDAP_AUTH_USER_FIELDS", default={})
+
+    # Path to a callable that takes a dict of {model_field_name: value},
+    # returning a dict of clean model data.
+    # Use this to customize how data loaded from LDAP is saved to the User model.
+    LDAP_AUTH_CLEAN_USER_DATA = env.str(
+        "LDAP_AUTH_CLEAN_USER_DATA", default="django_python3_ldap.utils.clean_user_data"
+    )
 
 # PowerDNS
 RRTYPES_WITH_PRIO = env.list("RRTYPES_WITH_PRIO", default=["MX", "SRV"])
